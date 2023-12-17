@@ -14,6 +14,10 @@ const { NotImplementedError } = require('../extensions/index.js');
 function getSeason(date) {
   if (!date) return 'Unable to determine the time of year!';
   try {
+    // check tricky moment
+    if (date.getFullYear() !== new Date(date).getFullYear()) {
+      throw new Error('Invalid date!');
+    }
     let month = date.getMonth();
     switch (month) {
       case 0:
@@ -38,7 +42,7 @@ function getSeason(date) {
         break;
     }
   } catch(e) {
-    throw new Error('Invalid date!')
+    throw new Error('Invalid date!');
   }
 }
 
